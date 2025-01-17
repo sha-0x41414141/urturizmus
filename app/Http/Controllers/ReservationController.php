@@ -9,7 +9,7 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Auth::user()->destinations();
+        $reservations = Auth::user()::with('destinations')->get();
         return view('reservations.index', compact('reservations'));
     }
 }
