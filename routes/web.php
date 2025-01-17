@@ -2,13 +2,19 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/destinations', [DestinationController::class, 'index']);
 Route::post('/destinations/{id}', [DestinationController::class, 'book'])->name('destinations.book');
-Route::delete('/destinations/{id}', [DestinationController::class, 'delete'])->name('destinations.delete');
-Route::post('/destination/{id}', [DestinationController::class, 'show'])->name('destination.show');
+
+Route::delete('/destinations/{id}', [DestinationController::class, 'delete'])->name('destinations.delete')->middleware(AdminMiddleware::class);
+Route::get('/destination/{id}', [DestinationController::class, 'show'])->name('destination.show')->middleware(AdminMiddleware::class);
+Route::put('/destination/{id}', [DestinationController::class, 'update'])->name('destination.update')->middleware(AdminMiddleware::class);
+
+Route::get('/reservations', [ReservationController::class, 'index'])->middleware(UserMiddleware::class);
 
 Route::get('/new-destination', function()
 {
