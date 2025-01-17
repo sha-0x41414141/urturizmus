@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations</title>
 </head>
+<style>
+    table{
+        margin: auto;
+    }
+
+    td, th{
+        padding: 10px;
+    }
+
+</style>
 <body>
     <h2 style="text-align: center;">Your reservations</h2>
     <table>
