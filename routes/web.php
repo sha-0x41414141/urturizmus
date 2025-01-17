@@ -2,9 +2,17 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DestinationController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/destinations', [DestinationController::class, 'index']);
+
+Route::get('/new-destination', function()
+{
+    return view('destinations.create');
+})->middleware(AdminMiddleware::class);
+
+Route::post('/new-destination', [DestinationController::class, 'create'])->name('destinations.create')->middleware(AdminMiddleware::class);
 
 Route::get('/', function () {
     return view('welcome');

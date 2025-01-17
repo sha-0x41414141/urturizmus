@@ -12,4 +12,17 @@ class DestinationController extends Controller
         $destinations = Destination::all();
         return view('destinations.index', compact('destinations'));
     }
+
+    public function create(Request $request)
+    {
+        $request->validate([
+            'destination' => 'required|string',
+            'price' => 'required|integer|min:0',
+            'departure' => 'required|date'
+        ]);
+
+        Destination::create($request->all());
+
+        return redirect()->back()->with('success', 'Destination added.');
+    }
 }
