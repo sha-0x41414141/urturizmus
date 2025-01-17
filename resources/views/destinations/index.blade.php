@@ -16,6 +16,14 @@
 
 </style>
 <body>
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+            {{$error}} <br>
+        @endforeach
+    @endif
+    @if(session('success'))
+        {{session('success')}}
+    @endif
     <table>
         <tr>
             <th>Destination</th>
@@ -27,6 +35,24 @@
             <td>{{$destination->destination}}</td>
             <td>{{$destination->price}}</td>
             <td>{{$destination->departure}}</td>
+            <form action="{{route('destinations.book', $destination->id)}}" method="POST">
+                 @csrf
+                <td><input type="submit" value="Book"></td>
+            </form>
+           
+            @if(Auth::user()->role === 'admin')
+            <form action="{{route('destinations.book', $destination->id)}}" method="POST">
+                 @csrf
+                 <td><input type="submit" value="Edit"></td>
+            </form>
+
+            <form action="{{route('destinations.delete', $destination->id)}}" method="POST">
+                 @csrf
+                 @method('DELETE')
+                <td><input type="submit" value="Delete"></td>
+                
+            </form>
+            @endif
         </tr>
         @endforeach
     </table>

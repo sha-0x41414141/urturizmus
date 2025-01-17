@@ -13,7 +13,7 @@ class DestinationController extends Controller
         return view('destinations.index', compact('destinations'));
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'destination' => 'required|string',
@@ -24,5 +24,23 @@ class DestinationController extends Controller
         Destination::create($request->all());
 
         return redirect()->back()->with('success', 'Destination added.');
+    }
+
+    public function book(Request $request, $id)
+    {
+        $destination = Destination::findOrFail($id);
+    }
+
+    public function update()
+    {
+        
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $destination = Destination::findOrFail($id);
+        $destination->delete();
+
+        return redirect()->back()->with('success', 'Destination deleted.');
     }
 }

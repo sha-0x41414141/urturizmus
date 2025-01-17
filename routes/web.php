@@ -6,13 +6,15 @@ use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/destinations', [DestinationController::class, 'index']);
+Route::post('/destinations/{id}', [DestinationController::class, 'book'])->name('destinations.book');
+Route::delete('/destinations/{id}', [DestinationController::class, 'delete'])->name('destinations.delete');
 
 Route::get('/new-destination', function()
 {
     return view('destinations.create');
 })->middleware(AdminMiddleware::class);
 
-Route::post('/new-destination', [DestinationController::class, 'create'])->name('destinations.create')->middleware(AdminMiddleware::class);
+Route::post('/new-destination', [DestinationController::class, 'store'])->name('destinations.create')->middleware(AdminMiddleware::class);
 
 Route::get('/', function () {
     return view('welcome');
