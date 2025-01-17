@@ -41,7 +41,7 @@
             </form>
            
             @if(Auth::user()->role === 'admin')
-            <form action="{{route('destinations.book', $destination->id)}}" method="POST">
+            <form action="{{route('destination.show', $destination->id)}}" method="POST">
                  @csrf
                  <td><input type="submit" value="Edit"></td>
             </form>

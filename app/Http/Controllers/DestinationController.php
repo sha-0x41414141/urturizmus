@@ -31,9 +31,14 @@ class DestinationController extends Controller
         $destination = Destination::findOrFail($id);
     }
 
-    public function update()
+    public function show(Request $request, $id)
     {
-        
+        $destination = Destination::findOrFail($id);
+        return view('destinations.show', compact('destination'));
+    }
+
+    public function update(Request $request, $id)
+    {
     }
 
     public function delete(Request $request, $id)

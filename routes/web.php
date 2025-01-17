@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/destinations', [DestinationController::class, 'index']);
 Route::post('/destinations/{id}', [DestinationController::class, 'book'])->name('destinations.book');
 Route::delete('/destinations/{id}', [DestinationController::class, 'delete'])->name('destinations.delete');
+Route::post('/destination/{id}', [DestinationController::class, 'show'])->name('destination.show');
 
 Route::get('/new-destination', function()
 {
