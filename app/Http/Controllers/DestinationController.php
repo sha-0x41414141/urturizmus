@@ -33,6 +33,8 @@ class DestinationController extends Controller
         $destination = Destination::findOrFail($id);
         $user = Auth::user();
         $destination->users()->attach($user->id);
+
+        return redirect('/destinations')->with('success', 'Destination booked.');
     }
 
     public function show(Request $request, $id)
